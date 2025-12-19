@@ -1,0 +1,51 @@
+{
+  "version": 2,
+  "dgSpecHash": "fucbz5eaGsc=",
+  "success": true,
+  "projectFilePath": "/home/jake/RiderProjects/AxiomCompiler/AxiomCompiler.csproj",
+  "expectedPackageFiles": [
+    "/home/jake/.nuget/packages/libllvm/20.1.2/libllvm.20.1.2.nupkg.sha512",
+    "/home/jake/.nuget/packages/linq.extras/5.0.0/linq.extras.5.0.0.nupkg.sha512",
+    "/home/jake/.nuget/packages/llvmsharp/20.1.2/llvmsharp.20.1.2.nupkg.sha512",
+    "/home/jake/.nuget/packages/llvmsharp.interop/20.1.2/llvmsharp.interop.20.1.2.nupkg.sha512",
+    "/home/jake/.nuget/packages/microsoft.entityframeworkcore/10.0.1/microsoft.entityframeworkcore.10.0.1.nupkg.sha512",
+    "/home/jake/.nuget/packages/microsoft.entityframeworkcore.abstractions/10.0.1/microsoft.entityframeworkcore.abstractions.10.0.1.nupkg.sha512",
+    "/home/jake/.nuget/packages/microsoft.entityframeworkcore.analyzers/10.0.1/microsoft.entityframeworkcore.analyzers.10.0.1.nupkg.sha512",
+    "/home/jake/.nuget/packages/microsoft.extensions.caching.abstractions/10.0.1/microsoft.extensions.caching.abstractions.10.0.1.nupkg.sha512",
+    "/home/jake/.nuget/packages/microsoft.extensions.caching.memory/10.0.1/microsoft.extensions.caching.memory.10.0.1.nupkg.sha512",
+    "/home/jake/.nuget/packages/microsoft.extensions.dependencyinjection/10.0.1/microsoft.extensions.dependencyinjection.10.0.1.nupkg.sha512",
+    "/home/jake/.nuget/packages/microsoft.extensions.dependencyinjection.abstractions/10.0.1/microsoft.extensions.dependencyinjection.abstractions.10.0.1.nupkg.sha512",
+    "/home/jake/.nuget/packages/microsoft.extensions.logging/10.0.1/microsoft.extensions.logging.10.0.1.nupkg.sha512",
+    "/home/jake/.nuget/packages/microsoft.extensions.logging.abstractions/10.0.1/microsoft.extensions.logging.abstractions.10.0.1.nupkg.sha512",
+    "/home/jake/.nuget/packages/microsoft.extensions.options/10.0.1/microsoft.extensions.options.10.0.1.nupkg.sha512",
+    "/home/jake/.nuget/packages/microsoft.extensions.primitives/10.0.1/microsoft.extensions.primitives.10.0.1.nupkg.sha512",
+    "/home/jake/.nuget/packages/system.linq/4.3.0/system.linq.4.3.0.nupkg.sha512",
+    "/home/jake/.nuget/packages/system.linq.expressions/4.3.0/system.linq.expressions.4.3.0.nupkg.sha512"
+  ],
+  "logs": [
+    {
+      "code": "NU1510",
+      "level": "Warning",
+      "message": "PackageReference System.Linq will not be pruned. Consider removing this package from your dependencies, as it is likely unnecessary.",
+      "projectPath": "/home/jake/RiderProjects/AxiomCompiler/AxiomCompiler.csproj",
+      "warningLevel": 1,
+      "filePath": "/home/jake/RiderProjects/AxiomCompiler/AxiomCompiler.csproj",
+      "libraryId": "System.Linq",
+      "targetGraphs": [
+        "net10.0"
+      ]
+    },
+    {
+      "code": "NU1510",
+      "level": "Warning",
+      "message": "PackageReference System.Linq.Expressions will not be pruned. Consider removing this package from your dependencies, as it is likely unnecessary.",
+      "projectPath": "/home/jake/RiderProjects/AxiomCompiler/AxiomCompiler.csproj",
+      "warningLevel": 1,
+      "filePath": "/home/jake/RiderProjects/AxiomCompiler/AxiomCompiler.csproj",
+      "libraryId": "System.Linq.Expressions",
+      "targetGraphs": [
+        "net10.0"
+      ]
+    }
+  ]
+}
