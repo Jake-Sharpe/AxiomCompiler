@@ -14,6 +14,7 @@ namespace AxiomCompiler
         [Description("1")] Struct,
         [Description("1")] Function,
         [Description("1")] Type,
+        [Description("1")] ClassRef,
         [Description("5")] LeftCurly,    // {
         [Description("5")] RightCurly,   // }
 
@@ -74,6 +75,13 @@ namespace AxiomCompiler
         [Description("110")] String
     }
 
+    public class Line
+    {
+        public string Text;
+        public int LineNumber;
+        public List<Token> Tokens = new List<Token>();
+        public Token Main;
+    }
     public class Token
     {
         public TokenType Type;
@@ -140,6 +148,13 @@ namespace AxiomCompiler
             }
             else if (token.Type == TokenType.Unknown)
             {
+                foreach (var Class in Values.Classes)
+                {
+                    if (Class.Name == Text)
+                    {
+                        token.Type = TokenType.ClassRef;
+                    }
+                }
                 if (double.TryParse(Text, out _))
                 {
                     token.Type = TokenType.Number;
@@ -149,7 +164,6 @@ namespace AxiomCompiler
                     token.Type = TokenType.Time;
                 }
             }
-            
             return token;
         }
 

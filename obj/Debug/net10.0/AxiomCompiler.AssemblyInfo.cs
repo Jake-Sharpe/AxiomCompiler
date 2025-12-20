@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AxiomCompiler")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e314acd4ea0d5bb4fff402d3658b8842a542116f")]
 [assembly: System.Reflection.AssemblyProductAttribute("AxiomCompiler")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AxiomCompiler")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
