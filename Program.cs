@@ -5,64 +5,95 @@ using LLVMSharp.Interop;
 if (args[0] == "build")
 {
     string path = args[1];
-    string[] TempLines = File.ReadAllLines(path);
-    List<string> OutputLines = new List<string>();
-    foreach (string line in TempLines)
-    {
-        OutputLines.Add(CleanLine(line));
-    }
-
+    string[] Lines = File.ReadAllLines(path);
     List<Line> lines = new List<Line>();
     int index = 0;
-    foreach (string linetext in OutputLines)
+    foreach (string linetexta in Lines)
     {
-        string[] cols = linetext.Split(' ');
+        string linetext = Extras.CleanLine(linetexta);
+        string[] cols = Extras.Split(linetext);
         Line line = new Line();
+        line.Text = linetext;
+        line.LineNumber = index;
         foreach (string col in cols)
         {
-            line.Tokens.Add(Tokens.Parse(linetext));
-            line.Text = linetext;
-            line.LineNumber = index;
+            line.Tokens.Add(Tokens.Parse(col));
         }
         line.Main = Tokens.Structure(line.Tokens);
         lines.Add(line);
         index++;
     }
 }
-static string CleanLine(string input)
+
+public class Extras
 {
-    if (string.IsNullOrWhiteSpace(input)) return string.Empty;
-
-    // 1. Remove single-line comments (// ...)
-    int commentIndex = input.IndexOf("//");
-    if (commentIndex >= 0)
+    public static string[] Split(string line)
     {
-        input = input.Substring(0, commentIndex);
+        List<string> Columns = new List<string>();
+        bool InString = false;
+        string ToAdd = "";
+        bool change = false;
+        foreach (char c in line)
+        {
+            change = false;
+            if (c == '\"')
+            {
+                InString = !InString;
+                Columns.Add(ToAdd);
+                ToAdd = "";
+            }
+            if (c == ' ')
+            {
+                Columns.Add(ToAdd);
+                ToAdd = "";
+                change = true;
+            }
+            if (!change)
+            {
+                ToAdd = ToAdd + c;
+            }
+        }
+        return Columns.ToArray();
     }
+    public static string CleanLine(string input)
+    {
+        if (string.IsNullOrWhiteSpace(input)) return string.Empty;
 
-    // 2. Remove the word "string" (as per your example)
-    // Note: \b ensures we only match the whole word "string", not "substring"
-    input = Regex.Replace(input, @"\bstring\b", "");
-    string cleaned = "";
-    cleaned = cleaned.Replace("[", " [ ");
-    cleaned = cleaned.Replace("(", " ( ");
-    cleaned = cleaned.Replace(")", " ) ");
-    cleaned = cleaned.Replace("]", " ] ");
-    cleaned = cleaned.Replace("<", " < ");
-    cleaned = cleaned.Replace(">", " > ");
-    // 3. Replace multiple whitespace characters with a single space
-    // 4. Trim leading and trailing whitespace
-    cleaned = Regex.Replace(cleaned, @"\s+", " ").Trim();
-    
+        // 1. Remove single-line comments (// ...)
+        int commentIndex = input.IndexOf("//");
+        if (commentIndex >= 0)
+        {
+            input = input.Substring(0, commentIndex);
+        }
 
-    return cleaned;
+        string cleaned = input;
+        cleaned = cleaned.Replace("[", " [ ");
+        cleaned = cleaned.Replace("(", " ( ");
+        cleaned = cleaned.Replace(")", " ) ");
+        cleaned = cleaned.Replace("]", " ] ");
+        cleaned = cleaned.Replace("<", " < ");
+        cleaned = cleaned.Replace(">", " > ");
+        cleaned = cleaned.Replace("+", " + ");
+        cleaned = cleaned.Replace("-", " - ");
+        cleaned = cleaned.Replace("*", " * ");
+        cleaned = cleaned.Replace("/", " / ");
+        // 3. Replace multiple whitespace characters with a single space
+        // 4. Trim leading and trailing whitespace
+        cleaned = Regex.Replace(cleaned, @"\s+", " ").Trim();
+
+
+        return cleaned;
+    }
 }
+
 public static class Values
 {
     public static LLVMBuilderRef Builder = new LLVMBuilderRef();
     public static Location BuildLocation = new Location();
-    public static List<Variable> Variables = new List<Variable>();
+    public static Space BuildSpace = new Space();
+    public static List<Space> Spaces = new List<Space>();
     public static List<Class> Classes = new List<Class>();
 }
+
 
 

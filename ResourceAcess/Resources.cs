@@ -8,9 +8,14 @@ namespace AxiomCompiler;
 
 public static unsafe class Resources
 {
-    public static PassValue Get(string Name)
+    public static PassValue Get(Token token)
     {
-        foreach (var VARIABLE in Values.Variables)
+        string Name = token.Value;
+        if (token.Children.Count != 0)
+        {
+            return Work.Excecute(token);
+        }
+        foreach (var VARIABLE in Values.BuildSpace.Variables)
         {
             if (VARIABLE.Name == Name)
             {
@@ -60,6 +65,28 @@ public unsafe class PassValue
     public LLVMTypeRef Type;
     public Location Location =  Location.RAM;
     public Class AssiotiatedClass = new Class();
+    public void Set(LLVMValueRef Value,bool LoadedSet = false)
+    {
+        if (LoadedSet)
+        {
+            Loaded = Value;
+        }
+        else
+        {
+            switch (Location)
+            {
+                case Location.RAM:
+                    CPUPointer = Value;
+                    break;
+                case Location.GLOBAL:
+                    GlobalPointer = Value;
+                    break;
+                case Location.SHARED:
+                    SharedPointer = Value;
+                    break;
+            }
+        }
+    }
     public static implicit operator LLVMTypeRef(PassValue Parse)
     {
         return LLVM.TypeOf(Parse);
